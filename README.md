@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="kb-logo.webp" alt="KaidenFlux logo" width="100" />
+  <img src="kb-logo.webp" alt="KaidenFlux logo" width="110" />
 </p>
 
 <h1 align="center">KaidenFlux</h1>
 
 <p align="center">
-  Windows mouse-acceleration configuration tool with curve editing and aim practice — built in C# on the Raw Accel driver.
+  <b>A modern Windows mouse acceleration configuration tool with aim practice and an AI-powered curve tuning assistant.</b>
 </p>
 
 <p align="center">
@@ -13,72 +13,89 @@
   <img src="https://img.shields.io/badge/platform-Windows%20x64-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/language-C%23-239120?style=flat-square" />
   <img src="https://img.shields.io/badge/.NET-4.7.2%2B-512BD4?style=flat-square" />
+  <img src="https://img.shields.io/badge/API-Google%20Gemini-orange?style=flat-square" />
+</p>
+
+<p align="center">
+  <img src="preview.png" alt="KaidenFlux AI Assistant Interface" width="850" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
 </p>
 
 ---
 
-## About
+## 🌟 What Makes KaidenFlux Unique
 
-KaidenFlux is a personal Windows desktop project built to practise C# application development, GUI design, and driver integration. It extends the open-source Raw Accel driver with a custom interface for configuring mouse acceleration curves and running aim practice sessions.
+Most mouse acceleration software requires manual tweaking of complex mathematical formulas and numeric parameters. **KaidenFlux introduces an intelligent AI Tuning Assistant powered by the Google Gemini API** to solve this problem:
 
-This is a personal software project, not a commercial product.
-
----
-
-## Features
-
-- **Curve editor** — Linear, Classic, Natural, Power, Jump, and Synchronous acceleration modes with live graph preview
-- **Aim practice** — Windowed aim tests with high-resolution timing and session comparisons
-- **Game profiles** — Save and load per-game acceleration setups with a sensitivity calculator
-- **Setup wizard** — Manual DPI, polling rate, sensitivity, pad size, and aiming style configuration
-- **Undo / Redo** — Full change history with Reset, Discard, Save, and Apply controls
+- 🎯 **Natural-Language Curve Tuning**: Instead of guessing exponents and offsets, simply describe what you need (e.g., *"Steadier aim"*, *"Faster flicks"*, *"Keep micro-adjustments slow in Valorant at 1600 DPI"*).
+- 🤖 **Gemini API Integration**: The app sends your current setup (DPI, mousepad size, sensitivity, game profile) to Google Gemini and returns a tailored acceleration curve proposal.
+- 🔐 **Windows DPAPI Encryption**: Your Gemini API key is encrypted locally using the Windows Data Protection API (`System.Security.Cryptography.ProtectedData`). Keys are never saved in plaintext.
+- 🛡️ **Safety & Parameter Validation**: Proposals are strictly validated on the client side using JSON schema verification. The AI cannot modify protected driver settings or kernel files — only valid curve parameters are proposed.
+- 📊 **Visual Diff & Undo**: Review proposed curve changes side-by-side with your active settings before applying them to the driver, with one-click Undo support.
 
 ---
 
-## Requirements
+## 🚀 Core Features
 
-- Windows 10 or Windows 11 (x64)
+### 1. AI Tuning Assistant
+- **Quick Preset Prompts**: One-click prompt triggers for *"Steadier aim"*, *"Faster flicks"*, and *"Gentler curve"*.
+- **Multi-Model Support**: Defaults to fast response models like `gemini-3.5-flash-lite` or custom Gemini model endpoints.
+- **Local Tuning Memory**: Keeps track of recent tuning requests and applied adjustments locally.
+
+### 2. Native Acceleration Curve Controls
+- **6 Curve Modes**: Linear, Classic, Natural, Power, Jump, and Synchronous.
+- **Full Parameter Control**: Input/output offsets, acceleration rates, decay, motivity, gain/velocity, and output caps.
+- **Independent Axis Scaling**: Separate horizontal and vertical axis multiplier options.
+
+### 3. Aim Practice & Testing
+- Integrated aim tests with high-resolution timing to test flick accuracy, tracking, and reaction speed before taking curves into competitive games.
+
+### 4. Game Profiles & Sensitivity Calculator
+- Per-game acceleration profiles for titles like *Valorant*, *CS2*, *Apex Legends*, and *Overwatch*.
+- Built-in sensitivity conversion calculator.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+| Component | Technology | Description |
+|---|---|---|
+| **Frontend UI** | **WPF (XAML) & WinForms** | Modern dark-themed dashboard, interactive charts, and responsive sidebar navigation |
+| **Language** | **C# 7.3+ / .NET Framework 4.7.2** | Core application logic, event-driven UI, async API orchestration |
+| **AI Integration** | **Google Gemini REST API** | Asynchronous HTTP client requesting structured JSON tuning proposals |
+| **Security** | **Windows DPAPI** | Hardware/user-bound encrypted API key storage |
+| **Low-Level Driver** | **C++ / Raw Accel Driver** | Kernel-level raw mouse input acceleration via signed Windows driver |
+| **Data Serialisation** | **Newtonsoft.Json** | Atomic JSON persistence for profiles, curves, and settings |
+
+---
+
+## 📦 Getting Started
+
+### Prerequisites
+- Windows 10 or Windows 11 (64-bit)
 - .NET Framework 4.7.2 or newer
 
----
-
-## Getting Started
-
-1. Extract the ZIP into a new folder
-2. Launch `KaidenFlux.exe`
-3. Keep `writer.exe` and the DLLs in the same folder
-4. If a driver install is required, use the Setup screen and restart Windows
-
-Existing settings, game profiles, curves, and sessions are stored under `%LOCALAPPDATA%\KaidenFlux\` and are preserved between versions.
+### Installation
+1. Download the latest release from the repository.
+2. Extract the complete archive into a dedicated folder.
+3. Launch `KaidenFlux.exe` (keep `writer.exe` and companion DLLs in the same directory).
+4. *(Optional)* Go to the **AI Assistant** tab, enter your Gemini API key, and begin tuning your curves.
 
 ---
 
-## Navigation
+## 🔒 Security & Privacy
 
-| Tab | Description |
-|---|---|
-| **Home** | Current curve, DPI/polling, Apply/Discard, and Undo |
-| **Tuning** | Game profiles, curve editor, saved curves, sensitivity calculator |
-| **Practice** | Aim tests and session comparisons |
-| **Setup** | Manual DPI, polling, sensitivity, pad size, and aiming style |
+- **No Plaintext Keys**: Your API key is encrypted using Windows DPAPI and stored in `%LOCALAPPDATA%\KaidenFlux\`. It cannot be decrypted by other Windows user accounts.
+- **Strict Validation**: All parameter proposals from the AI pass through local boundary checks before they can be previewed or applied to the kernel driver.
 
 ---
 
-## Built With
+## 📄 Licence
 
-- **C#** — WinForms application and core logic
-- **C++ / C** — Native Raw Accel driver wrapper
-- **Newtonsoft.Json** — JSON serialisation
-
-Build using `scripts/Build-Flux.ps1` with Roslyn `csc.exe`.
+This project is licensed under the MIT Licence — see the [LICENSE](LICENSE) file for details.  
+Includes components from the open-source Raw Accel driver (MIT) and Newtonsoft.Json.
 
 ---
 
-## Licence
-
-MIT. See [LICENSE](LICENSE) for details.  
-Newtonsoft.Json licence: [LICENSE.Newtonsoft.Json.md](LICENSE.Newtonsoft.Json.md)
-
----
-
-<p align="center">Personal project by <a href="https://black-knight21.github.io/Black-knight/">Black Knight</a></p>
+<p align="center">
+  <b>Developed by <a href="https://black-knight21.github.io/Black-knight/">Black Knight</a></b>
+</p>
