@@ -1,0 +1,5 @@
+Kaiden Flux includes components from Raw Accel, copyright (c) 2020 a1xd, MIT licensed.
+Original contributors include simon, _m00se_, Sidiouth, TauntyArmordillo, and Kovaak.
+The original signed driver is included unchanged. This is an independent project.
+See LICENSE for Raw Accel and LICENSE.Newtonsoft.Json.md for Newtonsoft.Json.
+
