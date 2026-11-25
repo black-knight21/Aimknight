@@ -135,7 +135,7 @@ namespace KaidenFlux
             if (preview) throw new InvalidOperationException("Profile writes are disabled in design preview.");
             var chosen = list.SelectedItem as GameProfile;
             if (chosen == null) throw new ArgumentException("Select a saved profile to delete.");
-            if (MessageBox.Show(window, "Move ‘" + chosen.Name + "’ to the local profile trash?", "Kaiden Flux", MessageBoxButton.YesNo) != MessageBoxResult.Yes) return;
+            if (MessageBox.Show(window, "Move ‘" + chosen.Name + "’ to the local profile trash?", "AimKnight", MessageBoxButton.YesNo) != MessageBoxResult.Yes) return;
             store.Delete(chosen.Id); if (setup().SelectedGameProfileId == chosen.Id) select(null);
             Reload(); NewProfile(); status("Profile moved to profiles/trash. Driver settings were not changed.");
         }

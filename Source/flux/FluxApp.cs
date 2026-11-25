@@ -32,14 +32,14 @@ namespace KaidenFlux
             if (args.Length == 1 && args[0] == "--install-driver")
             {
                 try { FluxInstaller.Install(); return 0; }
-                catch (Exception ex) { MessageBox.Show(FluxState.Friendly(ex.Message), "Kaiden Flux setup", MessageBoxButton.OK, MessageBoxImage.Error); return 1; }
+                catch (Exception ex) { MessageBox.Show(FluxState.Friendly(ex.Message), "AimKnight setup", MessageBoxButton.OK, MessageBoxImage.Error); return 1; }
             }
             bool preview = args.Any(a => a.StartsWith("--preview", StringComparison.Ordinal));
-            using (var mutex = new Mutex(true, preview ? "KaidenFluxPreview" : "RawAccelGrapher", out bool first))
+            using (var mutex = new Mutex(true, preview ? "AimKnightPreview" : "RawAccelGrapher", out bool first))
             {
-                if (!first) { MessageBox.Show("Close the other mouse tuning app before opening Kaiden Flux.", "Kaiden Flux"); return 0; }
+                if (!first) { MessageBox.Show("Close the other mouse tuning app before opening AimKnight.", "AimKnight"); return 0; }
                 var app = new Application();
-                app.DispatcherUnhandledException += (s, e) => { MessageBox.Show(FluxState.Friendly(e.Exception.Message), "Kaiden Flux"); e.Handled = true; };
+                app.DispatcherUnhandledException += (s, e) => { MessageBox.Show(FluxState.Friendly(e.Exception.Message), "AimKnight"); e.Handled = true; };
                 var shell = new FluxShell(preview);
                 shell.Window.Loaded += async (s, e) => {
                     await shell.StartAsync();
@@ -454,7 +454,7 @@ namespace KaidenFlux
                 "Keep your existing curve, or start with a classic acceleration preset. You'll be able to fine tune it afterward.",
                 ready ? "We'll save your preferences and apply your mouse setup. Game sensitivity and pad size are context for the AI." : "We'll save your preferences now. After you restart and reopen Flux, your mouse setup will be applied automatically."
             };
-            Text("WizardTitle", titles[wizardStep]); Text("WizardDescription", descriptions[wizardStep]); Text("WizardEyebrow", wizardStep == 0 ? "WELCOME TO KAIDEN FLUX" : wizardStep == 8 ? "MADE FOR YOU" : "PERSONALIZE YOUR FLOW");
+            Text("WizardTitle", titles[wizardStep]); Text("WizardDescription", descriptions[wizardStep]); Text("WizardEyebrow", wizardStep == 0 ? "WELCOME TO AIMKNIGHT" : wizardStep == 8 ? "MADE FOR YOU" : "PERSONALIZE YOUR FLOW");
             if (wizardStep == 0)
             {
                 if (!ready && !draft.DriverInstalled)
@@ -530,7 +530,7 @@ namespace KaidenFlux
             else live = configured;
             draft.Completed = true; draft.PendingApply = !ready; state = draft; state.Save();
             pending = expected = null; C<Border>("WizardOverlay").Visibility = Visibility.Collapsed;
-            Navigate("Overview"); Refresh(); Status(ready ? "Your mouse setup is saved and active. Welcome to Flux." : "Setup saved. Restart your PC, then reopen Kaiden Flux to activate it.");
+            Navigate("Overview"); Refresh(); Status(ready ? "Your mouse setup is saved and active. Welcome to AimKnight." : "Setup saved. Restart your PC, then reopen AimKnight to activate it.");
         }
 
         internal void PreviewWizard(int step) { OpenWizard(); wizardStep = Math.Max(0, Math.Min(8, step)); WizardPage(); }

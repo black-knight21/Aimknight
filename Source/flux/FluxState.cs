@@ -14,7 +14,7 @@ namespace KaidenFlux
         public string Mouse = "My mouse", Style = "Arm", Starter = "Keep current";
         public string SelectedGameProfileId;
         [JsonIgnore] internal string LoadWarning;
-        public static string Folder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KaidenFlux");
+        public static string Folder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AimKnight");
         public static string FilePath => Path.Combine(Folder, "setup.json");
         internal static FluxState Load()
             => LoadFrom(FilePath);
@@ -89,6 +89,6 @@ namespace KaidenFlux
             if (converted.Item2 != null) throw new ArgumentException(converted.Item2);
             return converted.Item1;
         }
-        internal static string Friendly(string message) => message.Replace("Raw Accel", "Kaiden Flux").Replace("RawAccel", "Kaiden Flux").Replace("rawaccel", "Kaiden Flux");
+        internal static string Friendly(string message) => message.Replace("Raw Accel", "AimKnight").Replace("RawAccel", "AimKnight").Replace("rawaccel", "AimKnight");
     }
 }

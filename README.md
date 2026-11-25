@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="kb-logo.webp" alt="KaidenFlux logo" width="110" />
+  <img src="aimknight-logo.png" alt="AimKnight logo" width="110" />
 </p>
 
-<h1 align="center">KaidenFlux</h1>
+<h1 align="center">AimKnight</h1>
 
 <p align="center">
   <b>A modern Windows mouse acceleration configuration tool with aim practice and an AI-powered curve tuning assistant.</b>
@@ -17,14 +17,14 @@
 </p>
 
 <p align="center">
-  <img src="preview.png" alt="KaidenFlux AI Assistant Interface" width="850" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+  <img src="preview.png" alt="AimKnight AI Assistant Interface" width="850" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
 </p>
 
 ---
 
-## 🌟 What Makes KaidenFlux Unique
+## 🌟 What Makes AimKnight Unique
 
-Most mouse acceleration software requires manual tweaking of complex mathematical formulas and numeric parameters. **KaidenFlux introduces an intelligent AI Tuning Assistant powered by the Google Gemini API** to solve this problem:
+Most mouse acceleration software requires manual tweaking of complex mathematical formulas and numeric parameters. **AimKnight introduces an intelligent AI Tuning Assistant powered by the Google Gemini API** to solve this problem:
 
 - 🎯 **Natural-Language Curve Tuning**: Instead of guessing exponents and offsets, simply describe what you need (e.g., *"Steadier aim"*, *"Faster flicks"*, *"Keep micro-adjustments slow in Valorant at 1600 DPI"*).
 - 🤖 **Gemini API Integration**: The app sends your current setup (DPI, mousepad size, sensitivity, game profile) to Google Gemini and returns a tailored acceleration curve proposal.
@@ -77,14 +77,14 @@ Most mouse acceleration software requires manual tweaking of complex mathematica
 ### Installation
 1. Download the latest release from the repository.
 2. Extract the complete archive into a dedicated folder.
-3. Launch `KaidenFlux.exe` (keep `writer.exe` and companion DLLs in the same directory).
+3. Launch `AimKnight.exe` (keep `writer.exe` and companion DLLs in the same directory).
 4. *(Optional)* Go to the **AI Assistant** tab, enter your Gemini API key, and begin tuning your curves.
 
 ---
 
 ## 🔒 Security & Privacy
 
-- **No Plaintext Keys**: Your API key is encrypted using Windows DPAPI and stored in `%LOCALAPPDATA%\KaidenFlux\`. It cannot be decrypted by other Windows user accounts.
+- **No Plaintext Keys**: Your API key is encrypted using Windows DPAPI and stored in `%LOCALAPPDATA%\AimKnight\`. It cannot be decrypted by other Windows user accounts.
 - **Strict Validation**: All parameter proposals from the AI pass through local boundary checks before they can be previewed or applied to the kernel driver.
 
 ---

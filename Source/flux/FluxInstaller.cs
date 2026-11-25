@@ -58,7 +58,7 @@ namespace KaidenFlux
                     {
                         int error = Marshal.GetLastWin32Error();
                         if (error != 1060) throw new Win32Exception(error, "The mouse driver service could not be inspected.");
-                        service = CreateService(manager, "rawaccel", "Kaiden Flux Mouse Driver", 0xF01FF, 1, 3, 1,
+                        service = CreateService(manager, "rawaccel", "AimKnight Mouse Driver", 0xF01FF, 1, 3, 1,
                             @"\SystemRoot\System32\drivers\rawaccel.sys", null, IntPtr.Zero, null, null, null);
                         if (service == IntPtr.Zero) throw new Win32Exception(Marshal.GetLastWin32Error(), "The mouse driver service could not be created.");
                         created = true;
