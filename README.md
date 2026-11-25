@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.3.4-8b5cf6?style=flat-square" />
+  <img src="https://img.shields.io/badge/version-0.3.4-D4AF37?style=flat-square" />
   <img src="https://img.shields.io/badge/platform-Windows%20x64-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/language-C%23-239120?style=flat-square" />
   <img src="https://img.shields.io/badge/.NET-4.7.2%2B-512BD4?style=flat-square" />
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="preview.png" alt="AimKnight AI Assistant Interface" width="850" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+  <img src="aimknight-preview.png" alt="AimKnight AI Assistant Interface" width="850" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
 </p>
 
 ---
