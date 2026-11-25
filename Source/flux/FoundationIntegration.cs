@@ -45,8 +45,8 @@ namespace KaidenFlux
             foundation.ProfilesPage.Visibility = page == "Profiles" ? Visibility.Visible : Visibility.Collapsed;
             foundation.CalculatorPage.Visibility = page == "Calculator" ? Visibility.Visible : Visibility.Collapsed;
             foreach (string name in new[] { "NavOverview", "NavAI", "NavLibrary" }) C<Button>(name).Background = Brush("#00000000");
-            profilesNav.Background = Brush(page == "Profiles" ? "#37303F" : "#00000000");
-            calculatorNav.Background = Brush(page == "Calculator" ? "#37303F" : "#00000000");
+            profilesNav.Background = Brush(page == "Profiles" ? "#241F12" : "#00000000");
+            calculatorNav.Background = Brush(page == "Calculator" ? "#241F12" : "#00000000");
             if (page == "Profiles") foundation.Reload(); else foundation.SyncCalculator(selectedGameProfile);
             Text("PageTitle", page == "Profiles" ? "Game profiles" : "Sensitivity calculator");
             Text("PageSubtitle", page == "Profiles" ? "Keep each game's sensitivity and preferred curve together." : "Reference conversions with your actual curve multiplier. Verify distances in-game.");

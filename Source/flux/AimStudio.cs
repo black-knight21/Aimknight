@@ -93,13 +93,13 @@ namespace KaidenFlux
     {
         internal readonly Grid Root = new Grid();
         internal bool Running => clock.IsRunning;
-        private readonly Canvas arena = new Canvas { Background = StudioUi.Ink("#110D1D"), ClipToBounds = true, MinHeight = 160 };
-        private readonly Ellipse target = new Ellipse { Fill = StudioUi.Ink("#C5A4FF"), Stroke = StudioUi.Ink("#ECDFFF"), StrokeThickness = 2, IsHitTestVisible = false };
+        private readonly Canvas arena = new Canvas { Background = StudioUi.Ink("#07070C"), ClipToBounds = true, MinHeight = 160 };
+        private readonly Ellipse target = new Ellipse { Fill = StudioUi.Ink("#D4AF37"), Stroke = StudioUi.Ink("#F0EDE6"), StrokeThickness = 2, IsHitTestVisible = false };
         private readonly TextBlock timer = StudioUi.Text("Choose a mode and start a 30-second session.");
         private readonly TextBlock results = StudioUi.Text("No measurements yet.");
         private readonly TextBlock comparison = StudioUi.Text("Complete comparable sessions to see a before/after comparison.");
-        private readonly Canvas timeline = new Canvas { Height = 70, Background = StudioUi.Ink("#130F21"), Margin = new Thickness(0, 6, 0, 8) };
-        private readonly ListBox history = new ListBox { Background = StudioUi.Ink("#130F21"), Foreground = StudioUi.Ink("#EDE5FF"), BorderThickness = new Thickness(0), MaxHeight = 155 };
+        private readonly Canvas timeline = new Canvas { Height = 70, Background = StudioUi.Ink("#09090F"), Margin = new Thickness(0, 6, 0, 8) };
+        private readonly ListBox history = new ListBox { Background = StudioUi.Ink("#09090F"), Foreground = StudioUi.Ink("#F0EDE6"), BorderThickness = new Thickness(0), MaxHeight = 155 };
         private readonly Stopwatch clock = new Stopwatch();
         private readonly Random random = new Random();
         private readonly AimSessionStore store;
@@ -197,7 +197,7 @@ namespace KaidenFlux
             timeline.Children.Clear();
             var samples = value.Mode == "Tracking" ? value.Tracking.Where(t => t.DistanceDip.HasValue).Select(t => Tuple.Create(t.AtSeconds, t.DistanceDip.Value)).ToArray() : value.Attempts.Where(a => a.Hit).Select(a => Tuple.Create(a.AtSeconds, a.AcquisitionMs)).ToArray();
             if (samples.Length >= 2) {
-                var path = new Polyline { Stroke = StudioUi.Ink("#B18AEF"), StrokeThickness = 2 };
+                var path = new Polyline { Stroke = StudioUi.Ink("#D4AF37"), StrokeThickness = 2 };
                 double max = Math.Max(1, samples.Max(p => p.Item2)), width = Math.Max(100, timeline.ActualWidth);
                 foreach (var sample in samples) path.Points.Add(new Point(sample.Item1 / value.DurationSeconds * width, 65 - sample.Item2 / max * 60)); timeline.Children.Add(path);
             } else timeline.Children.Add(StudioUi.Text("Not enough measured samples for a trend.", 11));

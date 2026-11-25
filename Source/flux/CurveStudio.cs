@@ -121,7 +121,7 @@ namespace KaidenFlux
     {
         internal readonly Grid Root = new Grid();
         internal readonly CurveHistory History = new CurveHistory();
-        private readonly Canvas canvas = new Canvas { Background = StudioUi.Ink("#130E20"), MinHeight = 180, ClipToBounds = true };
+        private readonly Canvas canvas = new Canvas { Background = StudioUi.Ink("#09090F"), MinHeight = 180, ClipToBounds = true };
         private readonly TextBox[] numbers = Enumerable.Range(0, 4).Select(i => new TextBox { Margin = new Thickness(0, 0, 0, 14) }).ToArray();
         private readonly TextBlock[] labels = new TextBlock[4];
         private readonly TextBox exponentBox = new TextBox { Margin = new Thickness(0,0,0,14) };
@@ -176,7 +176,7 @@ namespace KaidenFlux
             advancedFields.Children.Add(StudioUi.Text("Cap mode · Linear / Classic / Power",11));var caps=new WrapPanel();
             foreach(string cap in new[]{"input","output","in_out"}) {string selected=cap;var b=StudioUi.Button(window,cap=="in_out"?"Both":CultureInfo.InvariantCulture.TextInfo.ToTitleCase(cap),()=>{History.Set(CurveHistory.SetOption(History.Current,axis,"Cap mode",new JValue(selected)));Changed();},status);b.Padding=new Thickness(9,8,9,8);capButtons.Add(cap,b);caps.Children.Add(b);}advancedFields.Children.Add(caps);
             advancedFields.Children.Add(StudioUi.Text("Input cap · speed",11));advancedFields.Children.Add(inputCapBox);
-            panel.Children.Add(new Expander { Header="Advanced curve controls",Content=advancedFields,Foreground=StudioUi.Ink("#C9AFE8"),Margin=new Thickness(0,0,0,12) });
+            panel.Children.Add(new Expander { Header="Advanced curve controls",Content=advancedFields,Foreground=StudioUi.Ink("#D4AF37"),Margin=new Thickness(0,0,0,12) });
             panel.Children.Add(StudioUi.Button(window, "Update preview", () => EditNumbers(), status, true));
 
             panel.Children.Add(StudioUi.Text("X and Y are separate unless Link X & Y is selected. All changes stay in preview. Ratios, rotation, snapping and device assignments are preserved. Advanced controls change only the options you select."));
@@ -215,8 +215,8 @@ namespace KaidenFlux
             gainButton.Content=(bool)args["Gain / Velocity"]?"Calculation: Gain":"Calculation: Velocity";
             bool whole=(bool)History.Current["profiles"][0]["Input speed calculation parameters"]["Whole/combined accel (set false for 'by component' mode)"];axesButton.Content=whole?"Axes: Combined":"Axes: By component";axisNotice.Text=whole?"Combined uses the whole/X curve. Switch to By component to activate a separate Y curve.":"X and Y curves are active separately. Link edits only when you want both changed.";
             inputCapBox.Text=((double)args["Cap / Jump"]["x"]).ToString("0.######",CultureInfo.InvariantCulture);inputCapBox.IsEnabled=mode=="classic"||mode=="power";
-            foreach(var pair in capButtons){pair.Value.IsEnabled=mode=="classic"||mode=="power";pair.Value.Background=StudioUi.Ink((string)args["Cap mode"]==pair.Key?"#51465F":"#2B2932");}
-            foreach(var pair in modeButtons)pair.Value.Background=StudioUi.Ink(pair.Key==CurveHistory.ModeName(args)?"#51465F":"#2B2932");Draw();
+            foreach(var pair in capButtons){pair.Value.IsEnabled=mode=="classic"||mode=="power";pair.Value.Background=StudioUi.Ink((string)args["Cap mode"]==pair.Key?"#332B16":"#181820");}
+            foreach(var pair in modeButtons)pair.Value.Background=StudioUi.Ink(pair.Key==CurveHistory.ModeName(args)?"#332B16":"#181820");Draw();
         }
         private void Draw()
         {
@@ -228,11 +228,11 @@ namespace KaidenFlux
                 graphMax = Math.Max(1.5, Math.Max(before.Max(), after.Max()) * 1.25);
                 double w = canvas.ActualWidth - 55, h = canvas.ActualHeight - 45;
                 for (int i = 0; i <= 4; i++) {
-                    double y = 15 + h * i / 4; canvas.Children.Add(new Line { X1 = 35, X2 = 35 + w, Y1 = y, Y2 = y, Stroke = StudioUi.Ink("#33253F") });
+                    double y = 15 + h * i / 4; canvas.Children.Add(new Line { X1 = 35, X2 = 35 + w, Y1 = y, Y2 = y, Stroke = StudioUi.Ink("#1E1C24") });
                     var label = StudioUi.Text((graphMax * (1 - i / 4.0)).ToString("0.0"), 10); Canvas.SetTop(label, y - 6); canvas.Children.Add(label);
                 }
                 for (int i = 0; i <= 3; i++) { var label = StudioUi.Text((i * 20).ToString(), 10); Canvas.SetLeft(label, 32 + w * i / 3); Canvas.SetTop(label, 18 + h); canvas.Children.Add(label); }
-                foreach (var item in new[] { Tuple.Create(before, "#66517B"), Tuple.Create(after, "#C3A0FF") }) {
+                foreach (var item in new[] { Tuple.Create(before, "#5A5A68"), Tuple.Create(after, "#D4AF37") }) {
                     var line = new Polyline { Stroke = StudioUi.Ink(item.Item2), StrokeThickness = 3, IsHitTestVisible = false };
                     for (int i = 0; i < item.Item1.Length; i++) line.Points.Add(new Point(35 + w * i / 120, 15 + h * (1 - item.Item1[i] / graphMax)));
                     canvas.Children.Add(line);
@@ -249,7 +249,7 @@ namespace KaidenFlux
         }
         private void Handle(string id, double speed, double multiplier, string tip)
         {
-            var dot = new Ellipse { Width = 14, Height = 14, Fill = StudioUi.Ink("#E8D6FF"), Stroke = StudioUi.Ink("#8D58C9"), StrokeThickness = 2, Cursor = Cursors.SizeAll, ToolTip = tip };
+            var dot = new Ellipse { Width = 14, Height = 14, Fill = StudioUi.Ink("#F4D06F"), Stroke = StudioUi.Ink("#D4AF37"), StrokeThickness = 2, Cursor = Cursors.SizeAll, ToolTip = tip };
             Canvas.SetLeft(dot, 35 + (canvas.ActualWidth - 55) * speed / 60 - 7); Canvas.SetTop(dot, 15 + (canvas.ActualHeight - 45) * (1 - multiplier / graphMax) - 7);
             dot.MouseLeftButtonDown += (s, e) => { dragging = id; dragStart = e.GetPosition(canvas); dragValues = Values(); dragOriginal = (JObject)History.Current.DeepClone(); canvas.CaptureMouse(); e.Handled = true; }; canvas.Children.Add(dot);
         }

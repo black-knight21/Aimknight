@@ -48,7 +48,7 @@ namespace KaidenFlux
             overview.RowDefinitions.Insert(0, new RowDefinition { Height = GridLength.Auto });
             foreach (FrameworkElement child in overview.Children) Grid.SetRow(child, Grid.GetRow(child) + 1);
             overview.Children.Add(shortcuts);
-            hardwareOverview = new TextBlock { Text = "DPI and polling values are configured in Setup.", FontSize = 10, Foreground = StudioUi.Ink("#AAA6B2"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 8) };
+            hardwareOverview = new TextBlock { Text = "DPI and polling values are configured in Setup.", FontSize = 10, Foreground = StudioUi.Ink("#8A8A98"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 8) };
             var shortcutStack = new StackPanel(); overview.Children.Remove(shortcuts); shortcutStack.Children.Add(hardwareOverview); shortcutStack.Children.Add(shortcuts); overview.Children.Add(shortcutStack);
             var aiButtons = (StackPanel)C<Button>("ApplyAI").Parent;
             aiButtons.Children.Add(StudioUi.Button(Window, "Compare curves", () => Navigate("Editor"), Status));
@@ -86,10 +86,10 @@ namespace KaidenFlux
             C<Grid>("Overview").Visibility = C<Grid>("AIPage").Visibility = C<ScrollViewer>("LibraryPage").Visibility = Visibility.Collapsed;
             foreach (string name in new[] { "NavOverview", "NavAI", "NavLibrary" }) C<Button>(name).Background = Brush("#00000000");
             if (page == "Editor") {
-                curveEditor.Load(expected ?? live, pending ?? live); curveEditor.Root.Visibility = Visibility.Visible; curveNav.Background = Brush("#37303F");
+                curveEditor.Load(expected ?? live, pending ?? live); curveEditor.Root.Visibility = Visibility.Visible; curveNav.Background = Brush("#241F12");
                 Text("PageTitle", "Curve editor"); Text("PageSubtitle", "Native curves, separate axes, drag handles and reversible previews.");
             } else if (page == "Aim") {
-                aimStudio.LoadHistory(); aimStudio.Root.Visibility = Visibility.Visible; aimNav.Background = Brush("#37303F");
+                aimStudio.LoadHistory(); aimStudio.Root.Visibility = Visibility.Visible; aimNav.Background = Brush("#241F12");
                 Text("PageTitle", "Aim tests"); Text("PageSubtitle", "Flick, tracking and micro-adjustment practice with measured local results.");
             }
         }

@@ -206,7 +206,7 @@ namespace KaidenFlux
             C<Grid>("Overview").Visibility = page == "Overview" ? Visibility.Visible : Visibility.Collapsed;
             
             C<ScrollViewer>("LibraryPage").Visibility = page == "Library" ? Visibility.Visible : Visibility.Collapsed;
-            foreach (var item in new[] { "Overview", "AI", "Library" }) C<Button>("Nav" + item).Background = Brush(item == page ? "#37303F" : "#00000000");
+            foreach (var item in new[] { "Overview", "AI", "Library" }) C<Button>("Nav" + item).Background = Brush(item == page ? "#241F12" : "#00000000");
             Text("PageTitle",  page == "Library" ? "Saved curves" : "Dashboard");
             Text("PageSubtitle", page == "AI" ? "Generate a proposal, review the parameter changes, then apply." : page == "Library" ? "Preview a starting point, or return to something you love." : "Current settings and pending changes.");
             C<Grid>("Overview").BeginAnimation(UIElement.OpacityProperty, new DoubleAnimation(0.4, 1, TimeSpan.FromMilliseconds(220)));
@@ -336,32 +336,32 @@ namespace KaidenFlux
                 for (int i = 0; i <= 4; i++)
                 {
                     double y = top + h * i / 4;
-                    canvas.Children.Add(new Line { X1 = left, X2 = width - 12, Y1 = y, Y2 = y, Stroke = Brush("#33263F"), StrokeThickness = 1 });
-                    var label = new TextBlock { Text = (max * (1 - i / 4.0)).ToString("0.0") + "×", FontSize = 10, Foreground = Brush("#82718F") };
+                    canvas.Children.Add(new Line { X1 = left, X2 = width - 12, Y1 = y, Y2 = y, Stroke = Brush("#1E1C24"), StrokeThickness = 1 });
+                    var label = new TextBlock { Text = (max * (1 - i / 4.0)).ToString("0.0") + "×", FontSize = 10, Foreground = Brush("#8A8A98") };
                     Canvas.SetLeft(label, 0); Canvas.SetTop(label, y - 6); canvas.Children.Add(label);
                 }
                 for (int i = 0; i <= 3; i++)
                 {
                     double x = left + w * i / 3;
-                    canvas.Children.Add(new Line { X1 = x, X2 = x, Y1 = top, Y2 = top + h, Stroke = Brush("#231B30"), StrokeThickness = 1 });
-                    var label = new TextBlock { Text = (i * 20).ToString(), FontSize = 10, Foreground = Brush("#82718F") };
+                    canvas.Children.Add(new Line { X1 = x, X2 = x, Y1 = top, Y2 = top + h, Stroke = Brush("#16151C"), StrokeThickness = 1 });
+                    var label = new TextBlock { Text = (i * 20).ToString(), FontSize = 10, Foreground = Brush("#8A8A98") };
                     Canvas.SetLeft(label, x - 5); Canvas.SetTop(label, top + h + 9); canvas.Children.Add(label);
                 }
-                var line = new Polyline { Stroke = Brush("#BB96FF"), StrokeThickness = 3, StrokeLineJoin = PenLineJoin.Round };
+                var line = new Polyline { Stroke = Brush("#D4AF37"), StrokeThickness = 3, StrokeLineJoin = PenLineJoin.Round };
                 for (int i = 0; i < values.Length; i++) line.Points.Add(new Point(left + w * i / 120, top + h * (1 - values[i] / max)));
                 var area = new Polygon { Fill = new LinearGradientBrush(Color.FromArgb(65, 167, 109, 255), Color.FromArgb(0, 167, 109, 255), 90) };
                 area.Points.Add(new Point(left, top + h)); foreach (var point in line.Points) area.Points.Add(point); area.Points.Add(new Point(left + w, top + h));
                 canvas.Children.Add(area);
                 if (activeValues != null)
                 {
-                    var activeLine = new Polyline { Stroke = Brush("#85768F"), StrokeThickness = 2, StrokeDashArray = new DoubleCollection(new[] { 5.0, 4.0 }), IsHitTestVisible = false };
+                    var activeLine = new Polyline { Stroke = Brush("#8A8A98"), StrokeThickness = 2, StrokeDashArray = new DoubleCollection(new[] { 5.0, 4.0 }), IsHitTestVisible = false };
                     for (int i = 0; i < activeValues.Length; i++) activeLine.Points.Add(new Point(left + w * i / 120, top + h * (1 - activeValues[i] / max)));
                     canvas.Children.Add(activeLine);
                 }
                 canvas.Children.Add(line);
                 curveValues = values;
-                hoverLine = new Line { Y1 = top, Y2 = top + h, Stroke = Brush("#9576BC"), StrokeThickness = 1, StrokeDashArray = new DoubleCollection(new[] { 3.0, 4.0 }), Visibility = Visibility.Collapsed, IsHitTestVisible = false };
-                hoverDot = new System.Windows.Shapes.Ellipse { Width = 8, Height = 8, Fill = Brush("#EDDDFF"), Visibility = Visibility.Collapsed, IsHitTestVisible = false };
+                hoverLine = new Line { Y1 = top, Y2 = top + h, Stroke = Brush("#D4AF37"), StrokeThickness = 1, StrokeDashArray = new DoubleCollection(new[] { 3.0, 4.0 }), Visibility = Visibility.Collapsed, IsHitTestVisible = false };
+                hoverDot = new System.Windows.Shapes.Ellipse { Width = 8, Height = 8, Fill = Brush("#F4D06F"), Visibility = Visibility.Collapsed, IsHitTestVisible = false };
                 canvas.Children.Add(hoverLine); canvas.Children.Add(hoverDot);
                 Text("CurveAxis", InputDpi() > 0 ? "Input speed · in/s →" : "Input speed · counts/ms →");
             }
@@ -387,9 +387,9 @@ namespace KaidenFlux
         private void Message(string sender, string text, bool user)
         {
             var content = new StackPanel();
-            content.Children.Add(new TextBlock { Text = sender, FontSize = 10, FontWeight = FontWeights.SemiBold, Foreground = Brush(user ? "#D5C1F4" : "#B390EB"), Margin = new Thickness(0, 0, 0, 8) });
-            content.Children.Add(new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap, Foreground = Brush("#D6C9E5"), LineHeight = 22 });
-            C<StackPanel>("Messages").Children.Add(new Border { Child = content, Background = Brush(user ? "#302040" : "#20172F"), CornerRadius = new CornerRadius(14), Padding = new Thickness(18), Margin = new Thickness(user ? 25 : 0, 0, user ? 0 : 25, 14) });
+            content.Children.Add(new TextBlock { Text = sender, FontSize = 10, FontWeight = FontWeights.SemiBold, Foreground = Brush(user ? "#F4D06F" : "#D4AF37"), Margin = new Thickness(0, 0, 0, 8) });
+            content.Children.Add(new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap, Foreground = Brush("#F0EDE6"), LineHeight = 22 });
+            C<StackPanel>("Messages").Children.Add(new Border { Child = content, Background = Brush(user ? "#1E1A10" : "#12121A"), CornerRadius = new CornerRadius(14), Padding = new Thickness(18), Margin = new Thickness(user ? 25 : 0, 0, user ? 0 : 25, 14) });
             C<ScrollViewer>("ChatScroll").ScrollToEnd();
         }
         private async Task SendAsync()
@@ -411,7 +411,7 @@ namespace KaidenFlux
             var panel = C<StackPanel>("SavedCurves"); panel.Children.Clear();
             var folder = Path.Combine(FluxState.Folder, "curves");
             string[] files = !preview && Directory.Exists(folder) ? Directory.GetFiles(folder, "*.json").OrderByDescending(f => f).ToArray() : new string[0];
-            if (files.Length == 0) panel.Children.Add(new TextBlock { Text = "No saved curves yet. Save your first one from Overview.", Foreground = Brush("#A998BC"), Margin = new Thickness(0, 10, 0, 10) });
+            if (files.Length == 0) panel.Children.Add(new TextBlock { Text = "No saved curves yet. Save your first one from Overview.", Foreground = Brush("#8A8A98"), Margin = new Thickness(0, 10, 0, 10) });
             foreach (var file in files)
             {
                 string selected = file;
@@ -495,8 +495,8 @@ namespace KaidenFlux
                 string[] choices = wizardStep == 6 ? new[] { "Arm", "Wrist", "Hybrid" } : new[] { "Keep current", "Quiet aim", "Balanced", "Flick boost" };
                 foreach (var option in choices)
                 {
-                    string value = option; var b = new Button { Content = option, HorizontalContentAlignment = HorizontalAlignment.Left, Margin = new Thickness(0, 0, 0, 9), Background = Brush(option == choice ? "#6D469E" : "#2B2932") };
-                    b.Click += (s, e) => { choice = value; foreach (Button item in fields.Children) item.Background = Brush(item == b ? "#6D469E" : "#2B2932"); }; fields.Children.Add(b);
+                    string value = option; var b = new Button { Content = option, HorizontalContentAlignment = HorizontalAlignment.Left, Margin = new Thickness(0, 0, 0, 9), Background = Brush(option == choice ? "#6D469E" : "#181820") };
+                    b.Click += (s, e) => { choice = value; foreach (Button item in fields.Children) item.Background = Brush(item == b ? "#6D469E" : "#181820"); }; fields.Children.Add(b);
                 }
             }
             else fields.Children.Add(new TextBlock { Text = draft.Mouse + "\n" + draft.Dpi.ToString("N0") + " DPI  ·  " + (draft.Polling == 0 ? "Automatic polling" : draft.Polling + " Hz") + "\nGame sens " + draft.GameSensitivity + "  ·  " + draft.PadCm + " cm pad\n" + draft.Style + " aim  ·  " + draft.Starter, Foreground = Brush("#D6C0F2"), FontSize = 18, LineHeight = 32 });

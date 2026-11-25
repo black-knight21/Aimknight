@@ -65,10 +65,10 @@ namespace KaidenFlux
             if(!navigationReady)return;
             string category=page=="Overview"?"Home":page=="Aim"?"Practice":"Tuning";
             categoryPages[category]=page;
-            foreach(var pair in categoryButtons)pair.Value.Background=Brush(pair.Key==category?"#37303F":"#00000000");
+            foreach(var pair in categoryButtons)pair.Value.Background=Brush(pair.Key==category?"#241F12":"#00000000");
             categoryTabs.Children.Clear();categoryTabs.Visibility=category=="Home"?Visibility.Collapsed:Visibility.Visible;
             Action<string,string> tab=(label,destination)=>{
-                var b=StudioUi.Button(Window,label,()=>Navigate(destination),Status);b.Background=Brush(page==destination?"#51465F":"#2B2932");categoryTabs.Children.Add(b);
+                var b=StudioUi.Button(Window,label,()=>Navigate(destination),Status);b.Background=Brush(page==destination?"#332B16":"#181820");categoryTabs.Children.Add(b);
             };
             if(category=="Tuning") {
                 tab("Game profiles","Profiles");tab("Curve editor","Editor");tab("Saved curves","Library");tab("Sensitivity calculator","Calculator");

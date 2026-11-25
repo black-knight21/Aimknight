@@ -20,11 +20,11 @@ namespace KaidenFlux
         private readonly bool preview;
         private readonly Func<FluxState> setup;
         private GameProfile draft;
-        private readonly ListBox list = new ListBox { Background = B("#130F21"), Foreground = B("#EDE5FF"), BorderBrush = B("#35294E"), Padding = new Thickness(8) };
+        private readonly ListBox list = new ListBox { Background = B("#09090F"), Foreground = B("#F0EDE6"), BorderBrush = B("#382F18"), Padding = new Thickness(8) };
         private readonly TextBox name = new TextBox(), sensitivity = new TextBox(), ads = new TextBox(), yaw = new TextBox(), notes = new TextBox { AcceptsReturn = true, Height = 75, TextWrapping = TextWrapping.Wrap };
-        private readonly TextBlock metadata = new TextBlock { Foreground = B("#AAA6B2"), TextWrapping = TextWrapping.Wrap };
+        private readonly TextBlock metadata = new TextBlock { Foreground = B("#8A8A98"), TextWrapping = TextWrapping.Wrap };
         private readonly WrapPanel games = new WrapPanel();
-        private readonly TextBlock emptyProfiles = new TextBlock { Text = "No saved profiles yet.\nCreate your first one on the right.", TextWrapping = TextWrapping.Wrap, Foreground = B("#AAA6B2"), Margin = new Thickness(4, 8, 4, 15) };
+        private readonly TextBlock emptyProfiles = new TextBlock { Text = "No saved profiles yet.\nCreate your first one on the right.", TextWrapping = TextWrapping.Wrap, Foreground = B("#8A8A98"), Margin = new Thickness(4, 8, 4, 15) };
         private readonly TextBox calcDpi = new TextBox(), calcSens = new TextBox(), calcYaw = new TextBox(), calcPad = new TextBox();
         private readonly TextBlock calcResults = new TextBlock { FontSize = 19, LineHeight = 34, TextWrapping = TextWrapping.Wrap };
         private readonly TextBlock conversions = new TextBlock { Foreground = B("#CCB5F8"), LineHeight = 27, TextWrapping = TextWrapping.Wrap };
@@ -93,7 +93,7 @@ namespace KaidenFlux
         }
         private void PaintGames(Panel panel, string id)
         {
-            foreach (Button button in panel.Children) button.Background = B((string)button.Tag == id ? "#684395" : "#2B2932");
+            foreach (Button button in panel.Children) button.Background = B((string)button.Tag == id ? "#684395" : "#181820");
         }
         private void NewProfile()
         {
@@ -166,7 +166,7 @@ namespace KaidenFlux
             var left = Card(dock); left.Margin = new Thickness(0, 0, 18, 16); layout.Children.Add(left);
             var results = new StackPanel(); results.Children.Add(Label("Distance, not guesswork", 22)); results.Children.Add(calcResults);
             results.Children.Add(Label("Conversions · same DPI and base multiplier", 16)); results.Children.Add(conversions);
-            results.Children.Add(new TextBlock { Text = "eDPI compares values within the same game scale. Acceleration makes cm/360 speed-dependent: the base and 30 in/s figures are separate samples, not one universal sensitivity. ADS/scope formulas are not assumed; optional ADS values are stored only. Reference yaw values come from KovaaK's converter (Valorant 0.06996, Source/CS2/Apex 0.022, Overwatch 0.0066); edited game configs, FOV behavior, and firmware can affect real results. Verify with a measured in-game turn.", TextWrapping = TextWrapping.Wrap, Foreground = B("#AAA6B2"), Margin = new Thickness(0, 22, 0, 0), LineHeight = 22 });
+            results.Children.Add(new TextBlock { Text = "eDPI compares values within the same game scale. Acceleration makes cm/360 speed-dependent: the base and 30 in/s figures are separate samples, not one universal sensitivity. ADS/scope formulas are not assumed; optional ADS values are stored only. Reference yaw values come from KovaaK's converter (Valorant 0.06996, Source/CS2/Apex 0.022, Overwatch 0.0066); edited game configs, FOV behavior, and firmware can affect real results. Verify with a measured in-game turn.", TextWrapping = TextWrapping.Wrap, Foreground = B("#8A8A98"), Margin = new Thickness(0, 22, 0, 0), LineHeight = 22 });
             var right = new ScrollViewer { Content = Card(results), VerticalScrollBarVisibility = ScrollBarVisibility.Auto }; Grid.SetColumn(right, 1); layout.Children.Add(right);
             foreach (var box in new[] { calcDpi, calcSens, calcYaw, calcPad }) box.TextChanged += (s, e) => { calcResults.Text = "Inputs changed. Click Calculate."; conversions.Text = ""; };
             return layout;
